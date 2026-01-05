@@ -16,7 +16,7 @@ export const goods = [
 ];
 
 export const App = () => {
-  const [selectedGood, setGoods] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   return (
     <main className="section container">
@@ -31,35 +31,44 @@ export const App = () => {
             data-cy="ClearButton"
             type="button"
             className="delete ml-3"
-            onClick={() => setGoods('')}
+            onClick={() => setSelectedGood('')}
           />
         </h1>
       )}
 
       <table className="table">
         <tbody>
-          {goods.map(x => (
+          {goods.map(good => (
             <tr
-              key={x}
+              key={good}
               data-cy="Good"
-              className={selectedGood === x ? 'has-background-success-light'
-                : ''}
+              className={selectedGood === good ? 'has-background-success-light' : ''}
             >
               <td>
-                <button
-                  data-cy={selectedGood === x ? 'RemoveButton' : 'AddButton'}
-                  type="button"
-                  className={selectedGood === x ? 'button is-info' : 'button'}
-                  onClick={() => {
-                    setGoods(selectedGood === x ? '' : x);
-                  }}
-                >
-                  {selectedGood === x ? '-' : '+'}
-                </button>
+                {selectedGood === good ? (
+    /* Якщо цей товар обраний — показуємо кнопку видалення */
+    <button
+      data-cy="RemoveButton"
+      type="button"
+      className="button is-info"
+      onClick={() => setSelectedGood('')}
+    >
+      -
+    </button>
+  ) : (
+    <button
+      data-cy="AddButton"
+      type="button"
+      className="button"
+      onClick={() => setSelectedGood(good)}
+    >
+      +
+    </button>
+  )}
               </td>
 
               <td data-cy="GoodTitle" className="is-vcentered">
-                {x}
+                {good}
               </td>
             </tr>
           ))}
