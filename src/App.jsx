@@ -42,11 +42,12 @@ export const App = () => {
             <tr
               key={good}
               data-cy="Good"
-              className={selectedGood === good ? 'has-background-success-light' : ''}
+              className={
+                selectedGood === good ? 'has-background-success-light' : ''
+              }
             >
               <td>
                 {selectedGood === good ? (
-    /* Якщо цей товар обраний — показуємо кнопку видалення */
     <button
       data-cy="RemoveButton"
       type="button"
